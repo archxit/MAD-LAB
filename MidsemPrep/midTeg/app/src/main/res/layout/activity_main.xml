@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ToggleButton
+        android:id="@+id/toggleStay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOn="On Campus"
+        android:textOff="Off Campus"/>
+
+    <TextView
+        android:text="Select Options"
+        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+    <CheckBox android:id="@+id/cbCra" android:text="CRA"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+    <CheckBox android:id="@+id/cbOe" 
+        android:text="OE"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+    <CheckBox android:id="@+id/cbLab" 
+        android:text="LAB"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+    <CheckBox android:id="@+id/cbMess" android:text="MESS"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+    <RadioGroup android:id="@+id/rgGender" android:layout_height="wrap_content" android:layout_width="wrap_content">
+        
+        <RadioButton android:id="@+id/rbMale" android:text="Male"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+        <RadioButton android:id="@+id/rbFemale" android:text="Female"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+    </RadioGroup>
+
+    <Button android:id="@+id/btnConfirm" android:text="Confirm"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+    <Button android:id="@+id/btnClear" android:text="Clear"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+</LinearLayout>
