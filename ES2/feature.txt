@@ -1,0 +1,37 @@
+Design and develop an Android application for a Travel Booking System using Android Studio. The application should consist of multiple activities and perform database operations using SQLite.
+📱 Functional Requirements
+🔹 Activity 1: Booking Page
+Create a user interface that includes:
+An EditText to enter the Customer Name
+An EditText to enter the Number of Tickets
+A Spinner to select the Mode of Transport:
+Bus
+Train
+Car
+A RadioGroup to select Seat Preference:
+Window
+Aisle
+A Submit Button
+👉 Based on the selected transport type, assign ticket prices:
+Bus → ₹500
+Train → ₹800
+Car → ₹1000
+👉 Calculate:
+Total Price = Number of Tickets × Price per Ticket
+🔹 Activity 2: Summary Page
+After clicking Submit:
+Display all entered details:
+Name
+Number of Tickets
+Transport Type
+Seat Preference
+Total Price
+Provide:
+Edit Button → to modify details
+Next Button → to proceed to database operations
+🔹 Activity 3: Database Operations Page
+Implement SQLite database with the following operations:
+Insert → Save booking details
+View → Display all records
+Update → Modify existing record
+Delete → Remove record
