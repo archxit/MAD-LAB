@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.*;
@@ -10,12 +11,15 @@ public class PendingActivity extends AppCompatActivity {
 
     ListView listView;
     DBHelper db;
+    Button goLoginBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pending);
 
+        goLoginBtn = findViewById(R.id.goLoginBtn);
         listView = findViewById(R.id.listView);
         db = new DBHelper(this);
 
@@ -40,6 +44,15 @@ public class PendingActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 list
         );
+
+        goLoginBtn.setOnClickListener(v -> {
+            Toast.makeText(this, "Going to Login Page", Toast.LENGTH_SHORT).show();
+
+            Intent i = new Intent(this, LoginActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+            finishAffinity();
+        });
 
         listView.setAdapter(adapter);
     }

@@ -37,6 +37,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Date picker
         date.setOnClickListener(v -> {
+
+            Toast.makeText(this, "Select Date", Toast.LENGTH_SHORT).show();
             Calendar c = Calendar.getInstance();
             int y = c.get(Calendar.YEAR);
             int m = c.get(Calendar.MONTH);
@@ -52,6 +54,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Save button
         saveBtn.setOnClickListener(v -> {
+            if(selectedDate.isEmpty()){
+                Toast.makeText(this, "Select Date", Toast.LENGTH_SHORT).show();
+                return;
+            }
             String type = spinnerType.getSelectedItem().toString();
             boolean resolved = checkResolved.isChecked();
 

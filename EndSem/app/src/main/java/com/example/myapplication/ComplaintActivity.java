@@ -27,6 +27,7 @@ public class ComplaintActivity extends AppCompatActivity {
                 Toast.makeText(this, "Enter number of people", Toast.LENGTH_SHORT).show();
                 return;
             }
+            Toast.makeText(this, "Calculating Risk", Toast.LENGTH_SHORT).show();
 
             int p = Integer.parseInt(pStr);
 
