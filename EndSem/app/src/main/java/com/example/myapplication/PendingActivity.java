@@ -1,0 +1,46 @@
+package com.example.myapplication;
+
+import android.database.Cursor;
+import android.os.Bundle;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+import java.util.ArrayList;
+
+public class PendingActivity extends AppCompatActivity {
+
+    ListView listView;
+    DBHelper db;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pending);
+
+        listView = findViewById(R.id.listView);
+        db = new DBHelper(this);
+
+        ArrayList<String> list = new ArrayList<>();
+
+        Cursor c = db.getPending();
+
+        if(c.getCount() == 0){
+            Toast.makeText(this, "No Pending Complaints", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        while(c.moveToNext()){
+            String item = "ID: " + c.getInt(0) +
+                    "\nType: " + c.getString(1) +
+                    "\nDate: " + c.getString(2);
+            list.add(item);
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                list
+        );
+
+        listView.setAdapter(adapter);
+    }
+}
