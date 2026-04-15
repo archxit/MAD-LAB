@@ -8,3 +8,303 @@ Register screen has a date time picker, spinner for type of complaint, and 1 che
 Complaint screen has complaint ID, complaint date, no. Of people
 And a calculate risk button, which takes to calculation screen which shows risk amount by multiplying no. Of people with 5 and adding them with some number 
 Pending complaints just shows the complaints which were unresolved (where the checkbox is not selected in register screen so basically database used)
+
+
+Got it — here’s a **slightly more detailed but still simple, beginner-friendly guide** you can use for exam/viva 👇
+
+---
+
+# 📘 COMPLAINT MANAGEMENT APP – FEATURE DESCRIPTION
+
+---
+
+# 🔐 1. Login System (Database-Based Authentication)
+
+**Description:**
+The login system allows users to enter a username and password. Instead of hardcoding credentials, the app checks the entered data against records stored in the SQLite database.
+
+**How it works:**
+
+* User enters credentials
+* App queries database (`users` table)
+* If match found → login successful → Dashboard
+* Else → error message shown
+
+**Implemented in:**
+
+* `LoginActivity.java` → login logic (`checkUser()` call)
+* `DBHelper.java` → `checkUser()` method
+* `activity_login.xml` → UI
+
+---
+
+# 📝 2. Signup / Registration System
+
+**Description:**
+New users can create an account by entering a username and password. This data is stored in the database and later used for login.
+
+**How it works:**
+
+* User enters new credentials
+* Data inserted into `users` table
+* User can now log in using these credentials
+
+**Implemented in:**
+
+* `SignupActivity.java` → handles input + insert
+* `DBHelper.java` → `insertUser()`
+* `activity_signup.xml` → UI
+* `AndroidManifest.xml` → activity declaration
+
+---
+
+# 🗄️ 3. Database (SQLite Storage)
+
+**Description:**
+SQLite is used to store all persistent data in the app.
+
+**Tables used:**
+
+* `users` → stores login credentials
+* `complaints` → stores complaint details
+
+**Operations performed:**
+
+* Insert (new complaint/user)
+* Fetch (pending complaints)
+* Check (login validation)
+
+**Implemented in:**
+
+* `DBHelper.java`
+
+  * `onCreate()` → table creation
+  * `insertComplaint()`
+  * `insertUser()`
+  * `getPending()`
+  * `checkUser()`
+
+---
+
+# 📱 4. Dashboard Screen (Navigation Hub)
+
+**Description:**
+After login, the dashboard provides navigation to different parts of the app using buttons.
+
+**Options available:**
+
+* Register Complaint
+* Add Complaint Details
+* View Pending Complaints
+
+**Implemented in:**
+
+* `DashboardActivity.java` → button click navigation
+* `activity_dashboard.xml` → UI
+
+---
+
+# 🧾 5. Register Complaint Screen
+
+**Description:**
+This screen allows users to register a complaint with details like date, type, and status.
+
+**Features used:**
+
+* DatePicker → select date
+* Spinner → choose complaint type
+* Checkbox → mark resolved/unresolved
+
+**How it works:**
+
+* User fills details
+* Data is inserted into `complaints` table
+
+**Implemented in:**
+
+* `RegisterActivity.java`
+* `activity_register.xml`
+* `DBHelper.java` → `insertComplaint()`
+
+---
+
+# ⚠️ 6. Complaint Input Screen
+
+**Description:**
+This screen collects complaint-related numeric details needed for risk calculation.
+
+**Inputs:**
+
+* Complaint ID
+* Complaint date
+* Number of people affected
+
+**How it works:**
+
+* Takes input
+* Sends number of people to next screen using Intent
+
+**Implemented in:**
+
+* `ComplaintActivity.java`
+* `activity_complaint.xml`
+
+---
+
+# 🧮 7. Risk Calculation Feature
+
+**Description:**
+Calculates risk level based on number of people affected.
+
+**Formula used:**
+
+> Risk = (Number of People × 5) + 10
+
+**How it works:**
+
+* Receives data via Intent
+* Applies formula
+* Displays result
+
+**Implemented in:**
+
+* `RiskActivity.java`
+* `activity_risk.xml`
+
+---
+
+# 📋 8. Pending Complaints Display
+
+**Description:**
+Displays all complaints that are not yet resolved.
+
+**How it works:**
+
+* Fetches records where `resolved = 0`
+* Displays them using ListView
+
+**Implemented in:**
+
+* `PendingActivity.java`
+* `activity_pending.xml`
+* `DBHelper.java` → `getPending()`
+
+---
+
+# 🔁 9. Navigation Using Intents
+
+**Description:**
+The app moves between screens using Android Intents.
+
+**Flow:**
+
+* Login → Dashboard
+* Dashboard → Other screens
+* Complaint → Risk screen
+
+**Implemented in:**
+
+* All activity files using `startActivity()`
+
+---
+
+# 🔔 10. Toast Messages (User Feedback)
+
+**Description:**
+Toast messages provide quick feedback to the user for actions like login success, errors, and data saving.
+
+**Examples:**
+
+* “Login Successful”
+* “Invalid Credentials”
+* “Complaint Saved”
+
+**Implemented in:**
+
+* All activity files (`LoginActivity`, `RegisterActivity`, etc.)
+
+---
+
+# 🔄 11. Logout / Go to Login Feature
+
+**Description:**
+Allows user to return to login screen and clears previous screens from memory.
+
+**How it works:**
+
+* Button click → opens LoginActivity
+* Clears back stack using `finishAffinity()`
+
+**Implemented in:**
+
+* `PendingActivity.java`
+* `activity_pending.xml`
+
+---
+
+# 🎯 FINAL OVERVIEW
+
+This app demonstrates:
+
+* User authentication using SQLite
+* Data storage and retrieval
+* Multiple screens with navigation
+* UI components (Spinner, DatePicker, ListView)
+* Basic business logic (risk calculation)
+
+---
+
+# 🧠 Simple one-line summary (for viva)
+
+> This is a multi-activity Android app that uses SQLite for storing users and complaints, supports login/signup, complaint registration, risk calculation, and viewing pending complaints.
+
+---
+
+If you want, I can make this into a **perfect 10-mark answer or PDF format** 👍
+
+
+📁 Step 1: Create custom layout
+📄 res/layout/toast_layout.xml
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="@android:color/black"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/toastImage"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/logo"/>
+
+    <TextView
+        android:id="@+id/toastText"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:paddingStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
+📁 Step 2: Modify LoginActivity.java
+🔍 Find this:
+Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+✅ Replace with:
+LayoutInflater inflater = getLayoutInflater();
+View layout = inflater.inflate(R.layout.toast_layout, null);
+
+ImageView img = layout.findViewById(R.id.toastImage);
+TextView text = layout.findViewById(R.id.toastText);
+
+img.setImageResource(R.drawable.logo); // your image
+text.setText("Login Successful");
+
+Toast toast = new Toast(getApplicationContext());
+toast.setDuration(Toast.LENGTH_SHORT);
+toast.setView(layout);
+toast.show();
+📁 Step 3: Add imports (if missing)
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
