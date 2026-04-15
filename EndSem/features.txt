@@ -1,0 +1,10 @@
+So basically 6 screens
+1st one has username and password and image and a confirm button taking to 
+2nd screen - 3 buttons 
+Register (taking to register screen)
+Complaint (taking to complaint screen)
+Pending complaints (taking to pending complaints page)
+Register screen has a date time picker, spinner for type of complaint, and 1 checkbox to confirm if complaint is resolved or not and 1-2 more things i don’t remember 
+Complaint screen has complaint ID, complaint date, no. Of people
+And a calculate risk button, which takes to calculation screen which shows risk amount by multiplying no. Of people with 5 and adding them with some number 
+Pending complaints just shows the complaints which were unresolved (where the checkbox is not selected in register screen so basically database used)
