@@ -4,21 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnRegister"
-        android:text="Register"
+    <EditText
+        android:id="@+id/etComplaintId"
+        android:hint="Complaint ID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/etPeople"
+        android:hint="Number of People"
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/btnComplaint"
-        android:text="Complaint"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/btnPending"
-        android:text="Pending Complaints"
+        android:id="@+id/btnCalc"
+        android:text="Calculate Risk"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

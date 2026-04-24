@@ -4,21 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnRegister"
-        android:text="Register"
+    <Spinner
+        android:id="@+id/spinnerType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <Button
-        android:id="@+id/btnComplaint"
-        android:text="Complaint"
-        android:layout_width="match_parent"
+    <CheckBox
+        android:id="@+id/checkResolved"
+        android:text="Resolved?"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/btnPending"
-        android:text="Pending Complaints"
+        android:id="@+id/btnSave"
+        android:text="Save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/etDate"
+        android:hint="Select Date"
+        android:focusable="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
