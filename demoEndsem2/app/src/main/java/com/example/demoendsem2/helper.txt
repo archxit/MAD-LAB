@@ -1,0 +1,156 @@
+
+=====
+⚠️ THE ONLY THING YOU MUST ADD (IMPORTANT)
+
+Just add these tiny extras to your code bank (takes 5 mins):
+
+🔹 1. DELETE (very common twist)
+
+Add in DBHelper:
+
+public void deleteEvent(String name){
+    SQLiteDatabase db = this.getWritableDatabase();
+    db.delete("events", "name=?", new String[]{name});
+}
+🔹 2. SIMPLE RADIO GROUP (just in case)
+int id = radioGroup.getCheckedRadioButtonId();
+RadioButton rb = findViewById(id);
+String val = rb.getText().toString();
+🔹 3. Toast (you already know but keep ready)
+Toast.makeText(this, "Message", Toast.LENGTH_SHORT).show();
+======
+
+
+Requirement	Go to
+DB	Section 1
+navigation	Section 2
+list	Section 3
+filter	Section 1 (query)
+search	Section 9
+calculation	Section 7
+slider	Section 8
+
+
+
+📦 SECTION 1 — DATABASE (DBHelper) ⭐⭐⭐
+public class DBHelper extends SQLiteOpenHelper {
+
+    public DBHelper(Context context) {
+        super(context, "MyDB", null, 1);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE IF NOT EXISTS data(id TEXT, name TEXT, value INTEGER, status TEXT, date TEXT)");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS data");
+        onCreate(db);
+    }
+
+    public void insertData(String id, String name, int value, String status, String date){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("id", id);
+        cv.put("name", name);
+        cv.put("value", value);
+        cv.put("status", status);
+        cv.put("date", date);
+        db.insert("data", null, cv);
+    }
+
+    public Cursor getAll(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM data", null);
+    }
+
+    public Cursor getFiltered(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM data WHERE status='pending'", null);
+    }
+}
+📦 SECTION 2 — INTENT + DATA PASSING ⭐⭐⭐
+// go to next screen
+Intent i = new Intent(this, NextActivity.class);
+startActivity(i);
+
+// pass data
+i.putExtra("key", value);
+
+// receive
+String val = getIntent().getStringExtra("key");
+int num = getIntent().getIntExtra("key", 0);
+📦 SECTION 3 — LISTVIEW + ADAPTER ⭐⭐⭐
+ArrayList<String> list = new ArrayList<>();
+
+Cursor c = db.getAll();
+
+while(c.moveToNext()){
+    list.add(c.getString(0) + " - " + c.getString(1));
+}
+
+ArrayAdapter adapter = new ArrayAdapter(this,
+        android.R.layout.simple_list_item_1, list);
+
+listView.setAdapter(adapter);
+📦 SECTION 4 — CURSOR LOOP ⭐⭐⭐
+Cursor c = db.getAll();
+
+while(c.moveToNext()){
+    String col1 = c.getString(0);
+    int col2 = c.getInt(2);
+}
+📦 SECTION 5 — SPINNER ⭐⭐
+String[] items = {"A", "B", "C"};
+
+ArrayAdapter adapter = new ArrayAdapter(this,
+        android.R.layout.simple_spinner_item, items);
+
+spinner.setAdapter(adapter);
+
+// get value
+String val = spinner.getSelectedItem().toString();
+📦 SECTION 6 — DATE PICKER ⭐⭐
+etDate.setOnClickListener(v -> {
+
+    Calendar c = Calendar.getInstance();
+
+    DatePickerDialog dp = new DatePickerDialog(this,
+        (view, y, m, d) -> {
+            etDate.setText(d + "/" + (m+1) + "/" + y);
+        },
+        c.get(Calendar.YEAR),
+        c.get(Calendar.MONTH),
+        c.get(Calendar.DAY_OF_MONTH)
+    );
+
+    dp.show();
+});
+📦 SECTION 7 — CALCULATION + TOAST ⭐⭐⭐
+int result = a * 5 + 10;
+
+Toast.makeText(this, "Result: " + result, Toast.LENGTH_SHORT).show();
+📦 SECTION 8 — SEEKBAR ⭐⭐
+int value = seekBar.getProgress();
+📦 SECTION 9 — SEARCH (TextWatcher) ⭐⭐
+editText.addTextChangedListener(new TextWatcher() {
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        adapter.getFilter().filter(s);
+    }
+});
+📦 SECTION 10 — CHECKBOX ⭐⭐
+String status = checkBox.isChecked() ? "yes" : "no";
+📦 SECTION 11 — RADIO GROUP ⭐
+int id = radioGroup.getCheckedRadioButtonId();
+RadioButton rb = findViewById(id);
+String val = rb.getText().toString();
+📦 SECTION 12 — RATING BAR ⭐
+float rating = ratingBar.getRating();
+📦 SECTION 13 — SWITCH ⭐
+if(switch1.isChecked()){
+    // ON
+}
+📦 SECTION 14 — SIMPLE UPDATE (FOR “EDIT” BUTTON) ⭐
+db.execSQL("UPDATE data SET value=100 WHERE id='1'");
